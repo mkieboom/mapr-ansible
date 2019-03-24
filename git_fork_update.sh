@@ -4,7 +4,6 @@
 # doc: https://gist.github.com/CristinaSolana/1885435
 
 # Clone your fork:
-#git clone https://github.com/$my_username/$repo_name
 #git pull https://github.com/mkieboom/mapr-ansible
 
 # Update local project
