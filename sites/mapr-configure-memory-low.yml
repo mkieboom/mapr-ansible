@@ -1,0 +1,6 @@
+- import_playbook: mapr-include-vars.yml
+
+- name: Configure for low memory
+  hosts: all
+  roles:
+    - {role: ../roles/mapr-configure-memory-low, when: memory == 'low'}

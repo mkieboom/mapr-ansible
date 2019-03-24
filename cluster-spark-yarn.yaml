@@ -1,7 +1,7 @@
-- import_playbook: sites/common.yml
-- import_playbook: sites/mapr-precheck.yml
-- import_playbook: sites/mapr-repository.yml
-- import_playbook: sites/mapr-core.yml
+- import_playbook: cluster-minimum.yaml
 
 # Spark on YARN
 - import_playbook: sites/mapr-mep-spark.yml
+
+# Configure for low memory
+- import_playbook: sites/mapr-configure-memory-low.yml

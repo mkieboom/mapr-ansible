@@ -1,0 +1,183 @@
+---
+# Configure warden for LOW memory allocation
+- name: Modify warden.conf for LOW memory usage
+  lineinfile:
+    dest: /opt/mapr/conf/warden.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.regexp }}{{ item.line }}"
+  with_items:
+    - { regexp: 'service.command.cldb.heapsize.percent=', line: '8' }
+    - { regexp: 'service.command.cldb.heapsize.max=', line: '256' }
+    - { regexp: 'service.command.cldb.heapsize.min=', line: '256' }
+    - { regexp: 'service.command.mfs.heapsize.percent=', line: '15' }
+    - { regexp: 'service.command.mfs.heapsize.maxpercent=', line: '85' }
+    - { regexp: 'service.command.mfs.heapsize.min=', line: '512' }
+    - { regexp: 'service.command.mfs.heapsize.max=', line: '1024' }
+    - { regexp: 'service.command.webserver.heapsize.percent=', line: '3' }
+    - { regexp: 'service.command.webserver.heapsize.max=', line: '128' }
+    - { regexp: 'service.command.webserver.heapsize.min=', line: '128' }
+    - { regexp: 'service.command.nfs.heapsize.percent=', line: '3' }
+    - { regexp: 'service.command.nfs.heapsize.min=', line: '64' }
+    - { regexp: 'service.command.nfs.heapsize.max=', line: '64' }
+    - { regexp: 'service.command.os.heapsize.percent=', line: '10' }
+    - { regexp: 'service.command.os.heapsize.max=', line: '512' }
+    - { regexp: 'service.command.os.heapsize.min=', line: '256' }
+    - { regexp: 'service.command.warden.heapsize.percent=', line: '1' }
+    - { regexp: 'service.command.warden.heapsize.max=', line: '128' }
+    - { regexp: 'service.command.warden.heapsize.min=', line: '64' }
+    - { regexp: 'service.command.zk.heapsize.percent=', line: '1' }
+    - { regexp: 'service.command.zk.heapsize.max=', line: '128' }
+    - { regexp: 'service.command.zk.heapsize.min=', line: '128' }
+    - { regexp: 'service.command.nfs4.heapsize.percent=', line: '3' }
+    - { regexp: 'service.command.nfs4.heapsize.min=', line: '64' }
+    - { regexp: 'service.command.nfs4.heapsize.max=', line: '512' }
+
+
+# API Server
+- name: Check if warden.apiserver.conf exists
+  stat: path=/opt/mapr/conf/conf.d/warden.apiserver.conf
+  register: warden_apiserver_exists
+
+- name: Modify warden.apiserver.conf for LOW memory usage
+  lineinfile:
+    dest: /opt/mapr/conf/conf.d/warden.apiserver.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.regexp }}{{ item.line }}"
+  with_items:
+    - { regexp: 'service.heapsize.min=', line: '256' }
+    - { regexp: 'service.heapsize.max=', line: '512' }
+  when: warden_apiserver_exists.stat.exists == true
+
+
+# warden.objectstore.conf
+- name: Check if warden.objectstore.conf exists
+  stat: path=/opt/mapr/conf/conf.d/warden.objectstore.conf
+  register: warden_objectstore_exists
+
+- name: Modify warden.objectstore.conf for LOW memory usage
+  lineinfile:
+    dest: /opt/mapr/conf/conf.d/warden.objectstore.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.regexp }}{{ item.line }}"
+  with_items:
+    - { regexp: 'service.heapsize.min=', line: '256' }
+    - { regexp: 'service.heapsize.max=', line: '512' }
+  when: warden_objectstore_exists.stat.exists == true
+
+
+# warden.data-access-gateway.conf
+- name: Check if warden.data-access-gateway.conf exists
+  stat: path=/opt/mapr/conf/conf.d/warden.data-access-gateway.conf
+  register: warden_data_access_gateway_exists
+
+- name: Modify warden.data-access-gateway.conf for LOW memory usage
+  lineinfile:
+    dest: /opt/mapr/conf/conf.d/warden.data-access-gateway.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.regexp }}{{ item.line }}"
+  with_items:
+    - { regexp: 'service.heapsize.min=', line: '256' }
+    - { regexp: 'service.heapsize.max=', line: '512' }
+  when: warden_data_access_gateway_exists.stat.exists == true
+
+
+# warden.filemigrate.conf
+- name: Check if warden.filemigrate.conf exists
+  stat: path=/opt/mapr/conf/conf.d/warden.filemigrate.conf
+  register: warden_filemigrate_exists
+
+- name: Modify warden.filemigrate.conf for LOW memory usage
+  lineinfile:
+    dest: /opt/mapr/conf/conf.d/warden.filemigrate.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.regexp }}{{ item.line }}"
+  with_items:
+    - { regexp: 'service.heapsize.min=', line: '100' }
+    - { regexp: 'service.heapsize.max=', line: '100' }
+  when: warden_filemigrate_exists.stat.exists == true
+
+
+# warden.mastgateway.conf
+- name: Check if warden.mastgateway.conf exists
+  stat: path=/opt/mapr/conf/conf.d/warden.mastgateway.conf
+  register: warden_mastgateway_exists
+
+- name: Modify warden.mastgateway.conf for LOW memory usage
+  lineinfile:
+    dest: /opt/mapr/conf/conf.d/warden.mastgateway.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.regexp }}{{ item.line }}"
+  with_items:
+    - { regexp: 'service.heapsize.min=', line: '256' }
+    - { regexp: 'service.heapsize.max=', line: '512' }
+    - { regexp: 'service.heapsize.percent=', line: '5' }
+  when: warden_mastgateway_exists.stat.exists == true
+
+# warden.opentsdb.conf
+- name: Check if warden.opentsdb.conf exists
+  stat: path=/opt/mapr/conf/conf.d/warden.opentsdb.conf
+  register: warden_opentsdb_exists
+
+- name: Modify warden.opentsdb.conf for LOW memory usage
+  lineinfile:
+    dest: /opt/mapr/conf/conf.d/warden.opentsdb.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.regexp }}{{ item.line }}"
+  with_items:
+    - { regexp: 'service.heapsize.min=', line: '256' }
+    - { regexp: 'service.heapsize.max=', line: '512' }
+    - { regexp: 'service.heapsize.percent=', line: '5' }
+  when: warden_opentsdb_exists.stat.exists == true
+
+# warden.gateway.conf
+- name: Check if warden.gateway.conf exists
+  stat: path=/opt/mapr/conf/conf.d/warden.gateway.conf
+  register: warden_gateway_exists
+
+- name: Modify warden.gateway.conf for LOW memory usage
+  lineinfile:
+    dest: /opt/mapr/conf/conf.d/warden.gateway.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.regexp }}{{ item.line }}"
+  with_items:
+    - { regexp: 'service.heapsize.min=', line: '128' }
+    - { regexp: 'service.heapsize.max=', line: '256' }
+    - { regexp: 'service.heapsize.percent=', line: '5' }
+  when: warden_gateway_exists.stat.exists == true
+
+# Drill memory config
+- name: Check if Drill is installed
+  stat: path=/opt/mapr/drill/drillversion
+  register: drillinstalled
+
+- name: Get the Drill version
+  command: /bin/cat /opt/mapr/drill/drillversion
+  register: drillversion
+  when: drillinstalled.stat.exists == true
+
+- name: Check if warden.drill-bits.conf exists
+  stat: path=/opt/mapr/conf/conf.d/warden.drill-bits.conf
+  register: wardendrillexists
+
+# Configure drill for LOW memory allocation
+- name: Modify warden.drill-bits.conf for LOW memory usage
+  lineinfile:
+    dest: /opt/mapr/conf/conf.d/warden.drill-bits.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.regexp }}{{ item.line }}"
+  with_items:
+    - { regexp: 'service.env=DRILLBIT_MAX_PROC_MEM=', line: '3G' }
+    - { regexp: 'service.heapsize.min=', line: '500' }
+    - { regexp: 'service.heapsize.max=', line: '3000' }
+    - { regexp: 'service.heapsize.percent=', line: '5' }
+  when: drillinstalled.stat.exists == true and wardendrillexists.stat.exists == true
+
+# Configure drill for LOW memory allocation
+- name: Modify distrib-env.sh for LOW memory usage
+  lineinfile:
+    dest: /opt/mapr/drill/drill-{{drillversion.stdout}}/conf/distrib-env.sh
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: 'export DRILL_HEAP=', line: '#export DRILL_HEAP=${DRILL_HEAP:-"4G"}' }
+  when: drillinstalled.stat.exists == true
