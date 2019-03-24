@@ -1,0 +1,7 @@
+- import_playbook: cluster-minimum.yaml
+
+# Drill
+- import_playbook: sites/mapr-mep-drill.yml
+
+# Configure for low memory
+- import_playbook: sites/mapr-configure-memory-low.yml
