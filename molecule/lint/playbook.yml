@@ -49,6 +49,8 @@
     - role: ../../roles/mapr-configure-vars-zk
     - role: ../../roles/mapr-configure-warden-cldb-restart
     - role: ../../roles/mapr-configure-warden-restart
+    - role: ../../roles/mapr-configure-warden-cldb-restart-gracefully
+    - role: ../../roles/mapr-configure-warden-restart-gracefully
     - role: ../../roles/mapr-configure-zookeeper-restart
     - role: ../../roles/mapr-core-install
     - role: ../../roles/mapr-core-uninstall
@@ -131,7 +133,6 @@
     - role: ../../roles/mapr-nfsloopback-install
     - role: ../../roles/mapr-nfs-v3-uninstall
     - role: ../../roles/mapr-nodemanager-install
-    - role: ../../roles/mapr-nodemanager-localdir
     - role: ../../roles/mapr-nodemanager-uninstall
     - role: ../../roles/mapr-oozie-install
     - role: ../../roles/mapr-oozie-mysql
