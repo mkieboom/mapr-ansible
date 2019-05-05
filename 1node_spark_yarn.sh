@@ -1,5 +1,6 @@
 #!/bin/bash
-
+# To run:
+# curl https://raw.githubusercontent.com/mkieboom/mapr-ansible/master/1node_spark_yarn.sh | bash
 GITHUB_REPO=mapr-ansible
 
 # Clone or pull the github repository
@@ -26,5 +27,6 @@ time ansible-playbook \
   -e warden_restart_wait_time=0 \
   -e security_encryption_rest=True \
   -e security_all=maprsasl \
+  -e memory=low \
   -e disks=/dev/sdb \
   --connection=local
