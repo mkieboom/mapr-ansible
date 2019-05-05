@@ -1,5 +1,6 @@
 #!/bin/bash
-
+# To run:
+# curl https://raw.githubusercontent.com/mkieboom/mapr-ansible/master/1node_minimum.sh | bash
 GITHUB_REPO=mapr-ansible
 
 # Clone or pull the github repository
