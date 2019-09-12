@@ -25,7 +25,7 @@ time ansible-playbook \
   -e force_zookeeper_restart=False \
   -e force_warden_restart=False \
   -e warden_restart_wait_time=0 \
-  -e security_encryption_rest=True \
+  -e security_encryption_rest=False \
   -e security_all=none \
   -e disks=/dev/sdb \
   -e memory=low \
