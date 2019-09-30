@@ -26,6 +26,7 @@ time ansible-playbook \
   -e force_warden_restart=False \
   -e warden_restart_wait_time=0 \
   -e security_all=none \
+  -e security_encryption_rest=False \
   -e disks=/dev/sdb \
   -e memory=low \
   --connection=local
