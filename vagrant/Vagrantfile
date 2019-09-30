@@ -79,13 +79,13 @@ Vagrant.configure(2) do |config|
       config.vm.provider "virtualbox" do |vb|
         vb.customize ["modifyvm", :id, "--cpus", cpu.to_s]
         vb.customize ["modifyvm", :id, "--memory", memory.to_s]
-        vb.name = server[:hostname]
+        vb.name = server[:hostname] + "_" + server[:bridged_ip]
 
         unless File.exist?(file_to_disk)
           #vb.customize [ "createmedium", "disk", "--filename", "mydisk.vmdk", "--format", "vmdk", "--size", 1024 * 500 ]
           vb.customize ['createhd', '--filename', file_to_disk, '--size', 500 * 1024]
         end
-        vb.customize [ "storageattach", server[:hostname] , "--storagectl", "IDE", "--port", "1", "--device", "0", "--type", "hdd", "--medium", file_to_disk]
+        vb.customize [ "storageattach", server[:hostname] + "_" + server[:bridged_ip] , "--storagectl", "IDE", "--port", "1", "--device", "0", "--type", "hdd", "--medium", file_to_disk]
       end
 
 
