@@ -33,6 +33,7 @@ rpm --import http://package.mapr.com/releases/pub/maprgpg.key
 
 # Install dependencies for MapR NFSv3
 yum install -y nfs-utils rpcbind
+systemctl start rpcbind
 
 # Install MapR
 yum install -y mapr-core mapr-cldb mapr-zookeeper mapr-nfs mapr-fileserver
@@ -42,15 +43,15 @@ systemctl daemon-reload
 mkdir /mapr
 echo "127.0.0.1:/mapr /mapr hard,nolock" > /opt/mapr/conf/mapr_fstab
 
-# Configure and format the MapR-FS disks
-echo "/dev/sdb" > /tmp/disks.txt
-/opt/mapr/server/disksetup -F /tmp/disks.txt
-
 # Run configure.sh
-/opt/mapr/server/configure.sh -C $(hostname) -Z $(hostname) -N demo.mapr.com
+#/opt/mapr/server/configure.sh -C $(hostname) -Z $(hostname) -N demo.mapr.com
+
+# Configure and format the MapR-FS disks
+#echo "/dev/sdb" > /tmp/disks.txt
+#/opt/mapr/server/disksetup -F /tmp/disks.txt
+
 
 # Start MapR
-systemctl start rpcbind
-systemctl start mapr-zookeeper
-systemctl start mapr-warden
+#systemctl start mapr-zookeeper
+#systemctl start mapr-warden
 
