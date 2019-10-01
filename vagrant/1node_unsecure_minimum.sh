@@ -42,6 +42,10 @@ systemctl daemon-reload
 mkdir /mapr
 echo "127.0.0.1:/mapr /mapr hard,nolock" > /opt/mapr/conf/mapr_fstab
 
+# Configure and format the MapR-FS disks
+echo "/dev/sdb" > /tmp/disks.txt
+/opt/mapr/server/disksetup -F /tmp/disks.txt
+
 # Run configure.sh
 /opt/mapr/server/configure.sh -C $(hostname) -Z $(hostname) -N demo.mapr.com
 
