@@ -36,7 +36,7 @@ yum install -y nfs-utils rpcbind
 systemctl start rpcbind
 
 # Install MapR
-yum install -y mapr-core mapr-cldb mapr-zookeeper mapr-nfs mapr-fileserver
+yum install -y mapr-core mapr-cldb mapr-zookeeper mapr-nfs mapr-fileserver mapr-webserver
 systemctl daemon-reload
 
 # Create the /mapr mountpoint
@@ -44,14 +44,13 @@ mkdir /mapr
 echo "127.0.0.1:/mapr /mapr hard,nolock" > /opt/mapr/conf/mapr_fstab
 
 # Run configure.sh
-#/opt/mapr/server/configure.sh -C $(hostname) -Z $(hostname) -N demo.mapr.com
+/opt/mapr/server/configure.sh -C $(hostname) -Z $(hostname) -N demo.mapr.com
 
 # Configure and format the MapR-FS disks
-#echo "/dev/sdb" > /tmp/disks.txt
-#/opt/mapr/server/disksetup -F /tmp/disks.txt
-
+echo "/dev/sdb" > /tmp/disks.txt
+/opt/mapr/server/disksetup -F /tmp/disks.txt
 
 # Start MapR
-#systemctl start mapr-zookeeper
-#systemctl start mapr-warden
+systemctl start mapr-zookeeper
+systemctl start mapr-warden
 
